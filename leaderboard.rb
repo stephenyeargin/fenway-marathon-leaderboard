@@ -25,7 +25,7 @@ puts 'Rank by Amount'
 puts '--------------'
 participants.sort! { |a, b|  a['amount'] <=> b['amount'] }
 participants.reverse.each_with_index do |row, i|
-  puts "##{i+1} \t #{row['name'].ljust(30)} #{row['amount'].to_s.rjust(10)} (#{row['count']})"
+  puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
 end
 
 puts ''
@@ -34,5 +34,5 @@ puts 'Rank by Donors'
 puts '--------------'
 participants.sort! { |a, b|  a['count'] <=> b['count'] }
 participants.reverse.each_with_index do |row, i|
-  puts "##{i+1} \t #{row['name'].ljust(30)} #{row['amount'].to_s.rjust(10)} (#{row['count']})"
+  puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
 end
