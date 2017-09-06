@@ -21,18 +21,25 @@ participants.each_with_index do |row, i|
   participants[i]['count'] = page.css('.donorRoll table > tr').length
 end
 
-puts 'Rank by Amount'
-puts '--------------'
+# Update the README
+output = File.open('README.md', 'w' )
+
+output.puts '### Rank by Amount'
+output.puts ''
+output.puts '```'
 participants.sort! { |a, b|  a['amount'] <=> b['amount'] }
 participants.reverse.each_with_index do |row, i|
-  puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
+  output.puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
 end
-
-puts ''
-
-puts 'Rank by Donors'
-puts '--------------'
+output.puts '```'
+output.puts ''
+output.puts '### Rank by Donors'
+output.puts ''
+output.puts '```'
 participants.sort! { |a, b|  a['count'] <=> b['count'] }
 participants.reverse.each_with_index do |row, i|
-  puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
+  output.puts "##{i+1} \t #{row['name'].ljust(30)} #{('%.2f' % row['amount']).to_s.rjust(10)} (#{row['count']})"
 end
+output.puts '```'
+
+output.close
